@@ -182,24 +182,6 @@ do
         echo "ooooooooooL_L=${L}_oooooooooo"
         echo -e "\n\noooooooooo_L=${L}_oooooooooo\n\n" >> "${file}.txt"
 
-        # if [ -d "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}" ]; then
-        #     # 目錄 /path/to/dir 存在
-        #     echo -e "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}_ok" >> "${file}.txt"
-        # else
-        #     # 目錄 /path/to/dir 不存在
-        #     echo -e "mkdir /home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}" >> "${file}.txt"
-        #     mkdir "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}"
-        # fi
-
-        # if [ -d "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}" ]; then
-        #     # 目錄 /path/to/dir 存在
-        #     echo -e "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}_ok" >> "${file}.txt"
-        # else
-        #     # 目錄 /path/to/dir 不存在
-        #     echo -e "mkdir /home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}" >> "${file}.txt"
-        #     mkdir "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}"
-        # fi
-
         for (( j=0; j<=${t1}; j=j+1 ))
         do
                 J=$(echo "scale=3; ${J1}+${j}*${space_J}" | bc)
@@ -217,24 +199,6 @@ do
 
                 echo "xxxxxxxxxxxxxxx_${Jdis}_xxxxxxxxxxxxxxx"
                 echo -e "\n\nxxxxxxxxxxxxxxx_${Jdis}_xxxxxxxxxxxxxxx\n\n" >> "${file}.txt"
-
-                # if [ -d "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}/${Jdis}" ]; then
-                #     # 目錄 /path/to/dir 存在
-                #     echo -e "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}/${Jdis}_ok" >> "${file}.txt"
-                # else
-                #     # 目錄 /path/to/dir 不存在
-                #     echo -e "mkdir /home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}/${Jdis}" >> "${file}.txt"
-                #     mkdir "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}/${Jdis}"
-                # fi
-
-                # if [ -d "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}/${Jdis}" ]; then
-                #     # 目錄 /path/to/dir 存在
-                #     echo -e "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}/${Jdis}_ok" >> "${file}.txt"
-                # else
-                #     # 目錄 /path/to/dir 不存在
-                #     echo -e "mkdir /home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}/${Jdis}" >> "${file}.txt"
-                #     mkdir "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}/${Jdis}"
-                # fi
 
                 for (( d=0; d<=${t2}; d=d+1 ))
                 do
@@ -254,24 +218,6 @@ do
                         echo "---------------${Dim}---------------" 
                         echo -e "\n\n---------------${Dim}---------------\n\n" >> "${file}.txt"
 
-                        # if [ -d "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/L${L}/${Jdis}/${Dim}" ]; then
-                        #     # 目錄 /path/to/dir 存在
-                        #     echo -e "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/L${L}/${Jdis}/${Dim}_ok" >> "${file}.txt"
-                        # else
-                        #     # 目錄 /path/to/dir 不存在
-                        #     echo -e "mkdir /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/L${L}/${Jdis}/${Dim}" >> "${file}.txt"
-                        #     mkdir "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/L${L}/${Jdis}/${Dim}"
-                        # fi
-                        
-                        # if [ -d "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/slurmOutput/L${L}/${Jdis}/${Dim}" ]; then
-                        #     # 目錄 /path/to/dir 存在
-                        #     echo -e "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/slurmOutput/L${L}/${Jdis}/${Dim}_ok" >> "${file}.txt"
-                        # else
-                        #     # 目錄 /path/to/dir 不存在
-                        #     echo -e "mkdir /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/slurmOutput/L${L}/${Jdis}/${Dim}" >> "${file}.txt"
-                        #     mkdir "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/slurmOutput/L${L}/${Jdis}/${Dim}"
-                        # fi     
-
                         numOfinterval=$(echo "scale=0; (${s2}-${s1}+1)/${sInterval}" | bc)
                         echo -e "numOfinterval=$numOfinterval"
 
@@ -286,25 +232,9 @@ do
                                 echo -e ${name} >> "${file}.txt"
                                 scancel --name=${name}
                         done
-                        # cp /home/aronton/tSDRG_project/tSDRG/Main_15/sub/run.sh /home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}/${Jdis}/${Dim}/spin15_L${L}_${Jdis}_${Dim}_seed1=${s1}_seed2=${s2}.sh 
-                        
-                        # sed -e "s@scopion@scopion$partition@" -i /home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}/${Jdis}/${Dim}/spin15_L${L}_${Jdis}_${Dim}_seed1=${s1}_seed2=${s2}.sh 
-                        
-                        # sed -e "s@cpus-per-task@cpus-per-task=$Ncore@" -i /home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}/${Jdis}/${Dim}/spin15_L${L}_${Jdis}_${Dim}_seed1=${s1}_seed2=${s2}.sh 
-                        
-                        # sed -e "s@fileName@L${L}/${Jdis}/${Dim}/spin15_L${L}_${Jdis}_${Dim}_seed1=${s1}_seed2=${s2}@" -i /home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}/${Jdis}/${Dim}/spin15_L${L}_${Jdis}_${Dim}_seed1=${s1}_seed2=${s2}.sh 
-                        
-                        # sbatch /home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}/${Jdis}/${Dim}/spin15_L${L}_${Jdis}_${Dim}_seed1=${s1}_seed2=${s2}.sh ${L} ${J} ${D} ${s1} ${s2}
-                        
-                        # date >> /home/aronton/tSDRG_project/tSDRG/Main_1/jobRecord/pending
-                        
-                        # echo "Partition:", ${partition}, "Number of core", ${Ncore} "L:", ${L}, ",J:", ${J}, ",D:", ${D}, ",seed1:", ${s1}, ",seed2:", ${s2} >> /home/aronton/tSDRG_project/tSDRG/Main_1/jobRecord/pending 
                 done
         done
 done
-# else
-#     sh /home/aronton/tSDRG_project/tSDRG/Main_15/sub/sub.sh
-# fi
 
 date >> "${file}.txt"
 
