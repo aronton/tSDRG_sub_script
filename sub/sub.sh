@@ -87,19 +87,6 @@ echo -e "sInterval=$sInterval"
 BC=${18}
 echo -e "BC=$BC"
 
-now_date="$(date +'%Y_%m_%d')/"
-
-tSDRG_Path="/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/submit_record/"
-
-if [ -d "${tSDRG_Path}""${now_date}" ]; then
-    # 目錄 /path/to/dir 存在
-    echo -e "${tSDRG_Path}""${now_date}"
-else
-    # 目錄 /path/to/dir 不存在
-    echo -e "mkdir""${tSDRG_Path}""${now_date}"
-    mkdir "${tSDRG_Path}""${now_date}"
-fi
-
 J1_100=$(echo "scale=0; 100*(${J1})/1" | bc)
 
 if [ $J1_100 -lt 10 ]
@@ -172,19 +159,36 @@ else
     space_dim="dim"$space_D_100
 fi
 
+now_date="$(date +'%Y_%m_%d')/"
+
+tSDRG_Path="/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/submit_record/"
+
+fileName="tSDRG_Spin="${Spin}";BC=${BC}"";P="${P}";B="${bonDim}";L="${L1}"_"${L2}"("${space_L}");J="${J1dis}"_"${J2dis}"("${space_J_100}");D="${dim1}"_"${dim2}"("${space_D_100}");seed1="${s1}"_seed2="${s2}";Partition="${partition}";Number_of_core="${Ncore}
+
+fileDir=${tSDRG_Path}${now_date}${fileName}"/"
+
+if [ -d "${fileDir}" ]; then
+    # 目錄 /path/to/dir 存在
+    echo -e "${fileDir}"
+else
+    # 目錄 /path/to/dir 不存在
+    echo -e "mkdir -p""${fileDir}"
+    mkdir -p "${fileDir}"
+fi
+
+file=${fileDir}${fileName}
+
+echo -e "\n\ntSDRG_Spin="${Spin}";BC=${BC}"";P="${P}";B="${bonDim}";""\n""L="${L1}"_"${L2}"("${space_L}");""\n""J="${J1dis}"_"${J2dis}"("${space_J_100}");""\n""D="${dim1}"_"${dim2}"("${space_D_100}");""\n""seed1="${s1}"_seed2="${s2}";""\n""Partition="${partition}";Number_of_core="${Ncore}"\n\n" >> "${file}.txt"
+
+echo -e "\n\ntSDRG_Spin="${Spin}";BC=${BC}"";P="${P}";B="${bonDim}";""\n""L="${L1}"_"${L2}"("${space_L}");""\n""J="${J1dis}"_"${J2dis}"("${space_J_100}");""\n""D="${dim1}"_"${dim2}"("${space_D_100}");""\n""seed1="${s1}"_seed2="${s2}";""\n""Partition="${partition}";Number_of_core="${Ncore}"\n\n"
+
 # echo -e "\n\nPartition:"${partition}"\n""Number of core:"${Ncore}"\n""BC:${BC}""\n""L:" ${L1}"~"${L2}"("${space_L}")""\n""J:"${J1dis}"~"${J2dis}"("${space_J_100}")""\n""D:"${dim1}"~"${dim2}"("${space_D_100}")""\n""seed1="${s1}",seed2="${s2}"\n\n"
 
 # echo "tSDRG_Spin="${Spin}";P="${P}";B="${bonDim}";L="${L1}"_"${L2}"("${space_L}");J="${J1dis}"_"${J2dis}"("${space_Jdis}");D="${dim1}"_"${dim2}"("${space_dim}");seed1="${s1}"_seed2="${s2}";Partition="${partition}";Number_of_core="${cpuspertask}
 
 # read -p "Continue or not (Y/N): " Continue
 
-file="${tSDRG_Path}""${now_date}""tSDRG_Spin="${Spin}";BC=${BC}"";P="${P}";B="${bonDim}";L="${L1}"_"${L2}"("${space_L}");J="${J1dis}"_"${J2dis}"("${space_J_100}");D="${dim1}"_"${dim2}"("${space_D_100}");seed1="${s1}"_seed2="${s2}";Partition="${partition}";Number_of_core="${Ncore}
-
-echo -e "\n\ntSDRG_Spin="${Spin}";BC=${BC}"";P="${P}";B="${bonDim}";""\n""L="${L1}"_"${L2}"("${space_L}");""\n""J="${J1dis}"_"${J2dis}"("${space_J_100}");""\n""D="${dim1}"_"${dim2}"("${space_D_100}");""\n""seed1="${s1}"_seed2="${s2}";""\n""Partition="${partition}";Number_of_core="${Ncore}"\n\n" >> "${file}.txt"
-
 date >> "${file}.txt"
-
-echo -e "\n\ntSDRG_Spin="${Spin}";BC=${BC}"";P="${P}";B="${bonDim}";""\n""L="${L1}"_"${L2}"("${space_L}");""\n""J="${J1dis}"_"${J2dis}"("${space_J_100}");""\n""D="${dim1}"_"${dim2}"("${space_D_100}");""\n""seed1="${s1}"_seed2="${s2}";""\n""Partition="${partition}";Number_of_core="${Ncore}"\n\n"
 
 if [ "${space_L}" == "0" ]
 then
@@ -206,103 +210,7 @@ then
 else
     t2=$(echo "(${D2}-${D1})/${space_D}" | bc)
 fi
-#t0=$(echo "(${L2}-${L1})/${space_L}" | bc)
-#t1=$(echo "(${J2}-${J1})/${space_J}" | bc)
-#t2=$(echo "(${D2}-${D1})/${space_D}" | bc)
 
-# for (( l=0; l<=${t0}; l=l+1 ))
-# do
-#         L=$(echo "scale=3; ${L1}+${l}*${space_L}" | bc)
-
-#         if [ -d "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}" ]; then
-#             # 目錄 /path/to/dir 存在
-#             echo "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}"
-#         else
-#             # 目錄 /path/to/dir 不存在
-#             echo "mkdir /home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}"
-#             mkdir "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}"
-#         fi
-
-#         if [ -d "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}" ]; then
-#             # 目錄 /path/to/dir 存在
-#             echo "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}"
-#         else
-#             # 目錄 /path/to/dir 不存在
-#             echo "mkdir /home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}"
-#             mkdir "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}"
-#         fi
-
-#         for (( j=0; j<=${t1}; j=j+1 ))
-#         do
-#                 J=$(echo "scale=3; ${J1}+${j}*${space_J}" | bc)
-
-#                 if [ $J -lt 10 ]
-#                 then
-#                     Jdis="Jdis00"$J
-#                 elif [ $J -ge 10 ] && [ $J -lt 100 ]
-#                 then
-#                     Jdis="Jdis0"$J
-#                 else
-#                     Jdis="Jdis"$J
-#                 fi
-
-#                 if [ -d "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}/J${Jdis}" ]; then
-#                     # 目錄 /path/to/dir 存在
-#                     echo "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}/J${Jdis}"
-#                 else
-#                     # 目錄 /path/to/dir 不存在
-#                     echo "mkdir /home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}/J${Jdis}"
-#                     mkdir "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}/J${Jdis}"
-#                 fi
-
-#                 if [ -d "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}/J${Jdis}" ]; then
-#                     # 目錄 /path/to/dir 存在
-#                     echo "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}/J${Jdis}"
-#                 else
-#                     # 目錄 /path/to/dir 不存在
-#                     echo "mkdir /home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}/J${Jdis}"
-#                     mkdir "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}/J${Jdis}"
-#                 fi
-
-#                 for (( d=0; d<=${t2}; d=d+1 ))
-#                 do
-#                         D=$(echo "scale=0; 100*(${D1}+${d}*${space_D})/1" | bc)
-
-#                         if [ $D -lt 10 ]
-#                         then
-#                             Dim="Dim00"$D
-#                         elif [ $D -ge 10 ] && [ $D -lt 100 ]
-#                         then
-#                             Dim="Dim0"$D
-#                         else
-#                             Dim="Dim"$D
-#                         fi
-
-#                         if [ -d "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}/J${Jdis}/D${Dim}" ]; then
-#                             # 目錄 /path/to/dir 存在
-#                             echo "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}/J${Jdis}/D${Dim}"
-#                         else
-#                             # 目錄 /path/to/dir 不存在
-#                             echo "mkdir /home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}/J${Jdis}/D${Dim}"
-#                             mkdir "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}/J${Jdis}/D${Dim}"
-#                         fi
-                        
-#                         if [ -d "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}/J${Jdis}/D${Dim}" ]; then
-#                             # 目錄 /path/to/dir 存在
-#                             echo "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}/J${Jdis}/D${Dim}"
-#                         else
-#                             # 目錄 /path/to/dir 不存在
-#                             echo "mkdir /home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}/J${Jdis}/D${Dim}"
-#                             mkdir "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}/J${Jdis}/D${Dim}"
-#                         fi
-                
-#                 done
-#         done
-# done
-
-
-# if [ "${Continue}" == "Y" ]
-# then
 for (( l=0; l<=${t0}; l=l+1 ))
 do
     L=$(echo "scale=3; ${L1}+${l}*${space_L}" | bc)
@@ -437,8 +345,8 @@ do
 
                                 # echo "sh spin${Spin}_L${L}_${Jdis}_${Dim}_${bonDim}_${BC}_seed1=${s1}_seed2=${s2}.sh ${partition} ${L} ${J} ${D} ${s1} ${s2} ${Spin} ${bonDim} ${BC}"
                                 # echo -e "sh spin${Spin}_L${L}_${Jdis}_${Dim}_${bonDim}_${BC}_seed1=${s1}_seed2=${s2}.sh ${partition} ${L} ${J} ${D} ${s1} ${s2} ${Spin} ${bonDim} ${BC}" >> "${file}.txt"
-                                
-                                cp /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/sub/run.sh /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}/${Jdis}/${Dim}/${scriptName}.sh
+                                # /home/aronton/tSDRG_project/tSDRG/Sub_script/sub/run.sh
+                                cp /home/aronton/tSDRG_project/tSDRG/Sub_script/sub/run.sh /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}/${Jdis}/${Dim}/${scriptName}.sh
                                 
                                 sed -e "s@scopion@scopion$partition@" -i /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}/${Jdis}/${Dim}/${scriptName}.sh
                                 
@@ -469,3 +377,101 @@ echo -e "\n\ntSDRG_Spin="${Spin}";BC=${BC}"";P="${P}";B="${bonDim}";""\n""L="${L
 # echo "Partition:" ${partition} "Number of core:" ${Ncore} ";L:" ${L1} "~" ${L2} "(" ${space_L} ")" ";J:" ${J1} "~" ${J2} "(" ${space_J} ")" ";D:" ${D1} "~" ${D2} "(" ${space_D} ")" ",seed1:" ${s1} ",seed2:" ${s2} >> /home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/running
 
 # echo "Partition:" ${partition} "Number of core:" ${Ncore} ";L:" ${L1} "~" ${L2} "(" ${space_L} ")" ";J:" ${J1} "~" ${J2} "(" ${space_J} ")" ";D:" ${D1} "~" ${D2} "(" ${space_D} ")" ",seed1:" ${s1} ",seed2:" ${s2}
+
+#t0=$(echo "(${L2}-${L1})/${space_L}" | bc)
+#t1=$(echo "(${J2}-${J1})/${space_J}" | bc)
+#t2=$(echo "(${D2}-${D1})/${space_D}" | bc)
+
+# for (( l=0; l<=${t0}; l=l+1 ))
+# do
+#         L=$(echo "scale=3; ${L1}+${l}*${space_L}" | bc)
+
+#         if [ -d "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}" ]; then
+#             # 目錄 /path/to/dir 存在
+#             echo "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}"
+#         else
+#             # 目錄 /path/to/dir 不存在
+#             echo "mkdir /home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}"
+#             mkdir "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}"
+#         fi
+
+#         if [ -d "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}" ]; then
+#             # 目錄 /path/to/dir 存在
+#             echo "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}"
+#         else
+#             # 目錄 /path/to/dir 不存在
+#             echo "mkdir /home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}"
+#             mkdir "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}"
+#         fi
+
+#         for (( j=0; j<=${t1}; j=j+1 ))
+#         do
+#                 J=$(echo "scale=3; ${J1}+${j}*${space_J}" | bc)
+
+#                 if [ $J -lt 10 ]
+#                 then
+#                     Jdis="Jdis00"$J
+#                 elif [ $J -ge 10 ] && [ $J -lt 100 ]
+#                 then
+#                     Jdis="Jdis0"$J
+#                 else
+#                     Jdis="Jdis"$J
+#                 fi
+
+#                 if [ -d "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}/J${Jdis}" ]; then
+#                     # 目錄 /path/to/dir 存在
+#                     echo "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}/J${Jdis}"
+#                 else
+#                     # 目錄 /path/to/dir 不存在
+#                     echo "mkdir /home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}/J${Jdis}"
+#                     mkdir "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}/J${Jdis}"
+#                 fi
+
+#                 if [ -d "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}/J${Jdis}" ]; then
+#                     # 目錄 /path/to/dir 存在
+#                     echo "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}/J${Jdis}"
+#                 else
+#                     # 目錄 /path/to/dir 不存在
+#                     echo "mkdir /home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}/J${Jdis}"
+#                     mkdir "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}/J${Jdis}"
+#                 fi
+
+#                 for (( d=0; d<=${t2}; d=d+1 ))
+#                 do
+#                         D=$(echo "scale=0; 100*(${D1}+${d}*${space_D})/1" | bc)
+
+#                         if [ $D -lt 10 ]
+#                         then
+#                             Dim="Dim00"$D
+#                         elif [ $D -ge 10 ] && [ $D -lt 100 ]
+#                         then
+#                             Dim="Dim0"$D
+#                         else
+#                             Dim="Dim"$D
+#                         fi
+
+#                         if [ -d "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}/J${Jdis}/D${Dim}" ]; then
+#                             # 目錄 /path/to/dir 存在
+#                             echo "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}/J${Jdis}/D${Dim}"
+#                         else
+#                             # 目錄 /path/to/dir 不存在
+#                             echo "mkdir /home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}/J${Jdis}/D${Dim}"
+#                             mkdir "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/script/L${L}/J${Jdis}/D${Dim}"
+#                         fi
+                        
+#                         if [ -d "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}/J${Jdis}/D${Dim}" ]; then
+#                             # 目錄 /path/to/dir 存在
+#                             echo "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}/J${Jdis}/D${Dim}"
+#                         else
+#                             # 目錄 /path/to/dir 不存在
+#                             echo "mkdir /home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}/J${Jdis}/D${Dim}"
+#                             mkdir "/home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/slurmOutput/L${L}/J${Jdis}/D${Dim}"
+#                         fi
+                
+#                 done
+#         done
+# done
+
+
+# if [ "${Continue}" == "Y" ]
+# then

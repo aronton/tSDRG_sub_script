@@ -162,7 +162,12 @@ fi
 
 now_date="$(date +'%Y_%m_%d')/"
 
+echo -e "$now_date"
+
 tSDRG_Path="/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/rm_submit/"
+
+echo -e "$tSDRG_Path"
+
 
 if [ -d "${tSDRG_Path}""${now_date}" ]; then
     # 目錄 /path/to/dir 存在
@@ -173,7 +178,13 @@ else
     mkdir -p "${tSDRG_Path}""${now_date}"
 fi
 
-file=${tSDRG_Path}${now_date}"Scancel_Spin="${Spin}";L="${L1}"_"${L2}"("${space_L}");J="${J1dis}"_"${J2dis}"("${space_Jdis}");D="${dim1}"_"${dim2}"("${space_dim}");seed1="${s1}"_seed2="${s2}
+fileName="Scancel_Spin="${Spin}";L="${L1}"_"${L2}"("${space_L}");J="${J1dis}"_"${J2dis}"("${space_Jdis}");D="${dim1}"_"${dim2}"("${space_dim}");seed1="${s1}"_seed2="${s2}"(sInterval=$sInterval)"
+
+fileDir=${tSDRG_Path}${now_date}${fileName}
+
+mkdir -p "${fileDir}"
+
+file=${fileDir}"/"${fileName}
 
 for (( l=0; l<=${t0}; l=l+1 ))
 do
@@ -238,4 +249,4 @@ done
 
 date >> "${file}.txt"
 
-echo -e "\n\nL:" ${L1}"~"${L2}"("${space_L}")""\n""J:"${J1dis}"~"${J2dis}"("${space_Jdis}")""\n""D:"${dim1}"~"${dim2}"("${space_dim}")""\n""seed1="${s1}",seed2="${s2}"\n\n"
+echo -e ${fileName}"\n\n" >> "${file}.txt"

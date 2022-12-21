@@ -51,6 +51,6 @@ echo "./spin${Spin}.exe ${L} ${bonDim} 10 ${J} ${D} ${BC} ${s1} ${s2} ${Ncore}"
 #sbatch ./spin15.exe ${1} 30 10 ${2} ${3} PBC ${4} ${5}
 # date >> /home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/running
 # echo "L:", ${1}, ",J:", ${2}, ",D:", ${3}, ",seed1:", ${4}, ",seed2:", ${5} >> /home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/running
-/home/aronton/tSDRG_project/tSDRG/Main/spin${Spin}_string.exe ${L} ${bonDim} 10 ${J} ${D} ${BC} ${s1} ${s2}
+/home/aronton/tSDRG_project/tSDRG/Main/spin${Spin}_obc.exe ${L} ${bonDim} 10 ${J} ${D} ${BC} ${s1} ${s2}
 
 date
