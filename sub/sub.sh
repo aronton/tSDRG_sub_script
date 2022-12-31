@@ -218,32 +218,32 @@ do
     echo "ooooooooooL_L=${L}_oooooooooo"
     echo -e "\n\noooooooooo_L=${L}_oooooooooo\n\n" >> "${file}.txt"
 
-    if [ -d "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}" ]; then
-        # 目錄 /path/to/dir 存在
-        echo -e "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}_ok" >> "${file}.txt"
-    else
-        # 目錄 /path/to/dir 不存在
-        echo -e "mkdir /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}" >> "${file}.txt"
-        mkdir "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}"
-    fi
+    # if [ -d "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}" ]; then
+    #     # 目錄 /path/to/dir 存在
+    #     echo -e "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}_ok" >> "${file}.txt"
+    # else
+    #     # 目錄 /path/to/dir 不存在
+    #     echo -e "mkdir /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}" >> "${file}.txt"
+    #     mkdir "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}"
+    # fi
 
-    if [ -d "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}" ]; then
-        # 目錄 /path/to/dir 存在
-        echo -e "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}_ok" >> "${file}.txt"
-    else
-        # 目錄 /path/to/dir 不存在
-        echo -e "mkdir /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}" >> "${file}.txt"
-        mkdir "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}"
-    fi
+    # if [ -d "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}" ]; then
+    #     # 目錄 /path/to/dir 存在
+    #     echo -e "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}_ok" >> "${file}.txt"
+    # else
+    #     # 目錄 /path/to/dir 不存在
+    #     echo -e "mkdir /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}" >> "${file}.txt"
+    #     mkdir "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}"
+    # fi
 
-    if [ -d "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/slurmOutput/${BC}/B${bonDim}/L${L}" ]; then
-        # 目錄 /path/to/dir 存在
-        echo -e "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/slurmOutput/${BC}/B${bonDim}/L${L}_ok" >> "${file}.txt"
-    else
-        # 目錄 /path/to/dir 不存在
-        echo -e "mkdir /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/slurmOutput/${BC}/B${bonDim}/L${L}" >> "${file}.txt"
-        mkdir "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/slurmOutput/${BC}/B${bonDim}/L${L}"
-    fi
+    # if [ -d "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/slurmOutput/${BC}/B${bonDim}/L${L}" ]; then
+    #     # 目錄 /path/to/dir 存在
+    #     echo -e "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/slurmOutput/${BC}/B${bonDim}/L${L}_ok" >> "${file}.txt"
+    # else
+    #     # 目錄 /path/to/dir 不存在
+    #     echo -e "mkdir /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/slurmOutput/${BC}/B${bonDim}/L${L}" >> "${file}.txt"
+    #     mkdir "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/slurmOutput/${BC}/B${bonDim}/L${L}"
+    # fi
 
         for (( j=0; j<=${t1}; j=j+1 ))
         do
@@ -263,23 +263,23 @@ do
                 echo "xxxxxxxxxxxxxxx_${Jdis}_xxxxxxxxxxxxxxx"
                 echo -e "\n\nxxxxxxxxxxxxxxx_${Jdis}_xxxxxxxxxxxxxxx\n\n" >> "${file}.txt"
 
-                if [ -d "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}/${Jdis}" ]; then
-                    # 目錄 /path/to/dir 存在
-                    echo -e "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}//B${bonDim}/L${L}/${Jdis}_ok" >> "${file}.txt"
-                else
-                    # 目錄 /path/to/dir 不存在
-                    echo -e "mkdir /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}//B${bonDim}/L${L}/${Jdis}" >> "${file}.txt"
-                    mkdir "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}//B${bonDim}/L${L}/${Jdis}"
-                fi
+                # if [ -d "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}/${Jdis}" ]; then
+                #     # 目錄 /path/to/dir 存在
+                #     echo -e "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}//B${bonDim}/L${L}/${Jdis}_ok" >> "${file}.txt"
+                # else
+                #     # 目錄 /path/to/dir 不存在
+                #     echo -e "mkdir /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}//B${bonDim}/L${L}/${Jdis}" >> "${file}.txt"
+                #     mkdir "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}//B${bonDim}/L${L}/${Jdis}"
+                # fi
 
-                if [ -d "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/slurmOutput/${BC}//B${bonDim}}/L${L}/${Jdis}" ]; then
-                    # 目錄 /path/to/dir 存在
-                    echo -e "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/slurmOutput/${BC}//B${bonDim}/L${L}/${Jdis}_ok" >> "${file}.txt"
-                else
-                    # 目錄 /path/to/dir 不存在
-                    echo -e "mkdir /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/slurmOutput/${BC}//B${bonDim}/L${L}/${Jdis}" >> "${file}.txt"
-                    mkdir "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/slurmOutput/${BC}//B${bonDim}/L${L}/${Jdis}"
-                fi
+                # if [ -d "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/slurmOutput/${BC}//B${bonDim}}/L${L}/${Jdis}" ]; then
+                #     # 目錄 /path/to/dir 存在
+                #     echo -e "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/slurmOutput/${BC}//B${bonDim}/L${L}/${Jdis}_ok" >> "${file}.txt"
+                # else
+                #     # 目錄 /path/to/dir 不存在
+                #     echo -e "mkdir /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/slurmOutput/${BC}//B${bonDim}/L${L}/${Jdis}" >> "${file}.txt"
+                #     mkdir "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/slurmOutput/${BC}//B${bonDim}/L${L}/${Jdis}"
+                # fi
 
                 for (( d=0; d<=${t2}; d=d+1 ))
                 do
@@ -305,7 +305,7 @@ do
                         else
                             # 目錄 /path/to/dir 不存在
                             echo -e "mkdir /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}/${Jdis}/${Dim}" >> "${file}.txt"
-                            mkdir "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}/${Jdis}/${Dim}"
+                            mkdir -p "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}/${Jdis}/${Dim}"
                         fi
                         
                         if [ -d "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/slurmOutput/${BC}/B${bonDim}/L${L}/${Jdis}/${Dim}" ]; then
@@ -314,7 +314,7 @@ do
                         else
                             # 目錄 /path/to/dir 不存在
                             echo -e "mkdir /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/slurmOutput/${BC}/B${bonDim}/L${L}/${Jdis}/${Dim}" >> "${file}.txt"
-                            mkdir "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/slurmOutput/${BC}/B${bonDim}/L${L}/${Jdis}/${Dim}"
+                            mkdir -p "/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/slurmOutput/${BC}/B${bonDim}/L${L}/${Jdis}/${Dim}"
                         fi     
 
                         # sInterval=$(echo "scale=0; (${17})/$sInterval" | bc)
