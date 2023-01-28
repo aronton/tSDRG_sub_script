@@ -1,10 +1,14 @@
 #!/bin/bash
 #SBATCH --partition=scopion
 #SBATCH --ntasks=1
+#SBATCH --job-name=example
 #SBATCH --cpus-per-task
 #SBATCH --output=/home/aronton/tSDRG_project/tSDRG/Main/jobRecord/slurmOutput/fileName.out
 
 date
+
+echo -e "current dir:"
+pwd
 
 #echo "The script name is        ==> ${0}"
 #echo "Total parameter number is ==> $#"
@@ -51,6 +55,6 @@ echo "./spin${Spin}.exe ${L} ${bonDim} 10 ${J} ${D} ${BC} ${s1} ${s2} ${Ncore}"
 #sbatch ./spin15.exe ${1} 30 10 ${2} ${3} PBC ${4} ${5}
 # date >> /home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/running
 # echo "L:", ${1}, ",J:", ${2}, ",D:", ${3}, ",seed1:", ${4}, ",seed2:", ${5} >> /home/aronton/tSDRG_project/tSDRG/Main_15/jobRecord/running
-/home/aronton/tSDRG_project/tSDRG/Main/spin${Spin}_obc1.exe ${L} ${bonDim} 10 ${J} ${D} ${BC} ${s1} ${s2}
+/home/aronton/tSDRG_project/tSDRG/Main/spin${Spin}.exe ${L} ${bonDim} 10 ${J} ${D} ${BC} ${s1} ${s2}
 
 date

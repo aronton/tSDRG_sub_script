@@ -1,8 +1,31 @@
+#!/bin/bash
+
+# function summary() {
+#     squeue "$@" | awk 
+#     BEGIN {
+#         abbrev["R"]="(Running)"
+#         abbrev["PD"]="(Pending)"
+#         abbrev["CG"]="(Completing)"
+#         abbrev["F"]="(Failed)"
+#     }
+#     NR>1 {a[$]++}
+#     END {
+#         for (i in a) {
+#             printf "%-2s %-12s %d\n", i, abbrev[i], a[i]
+#         }
+#     }
+# }
+
 sinfo
 read -p "partition : " partition
 scontrol show partition "scopion${partition}"
 read -p "Number of core : " Ncore
 read -p "Spin : " Spin
+if [ "${Spin}" != "${1}" ] 
+then
+    echo -e "Spin key in is inconsistent, please resubmit"
+    sh ~/aronton_script.sh
+fi
 read -p "ProDis : " P
 read -p "BonDim : " bonDim
 read -p "Init_L : " L1

@@ -35,7 +35,7 @@ read -p "Continue or not?(Y/N) : " Continue
 
 if [ "${Continue}" == "Y" ]
 then
-    nohup sh /home/aronton/tSDRG_project/tSDRG/Sub_script/scancel.sh $Spin $ProbDis $bonDim $L1 $L2 $space_L $J1 $J2 $space_J $D1 $D2 $space_D $s1 $s2 $deltaSeed $BC $Ncore $partition &
+    nohup sh /home/aronton/tSDRG_project/tSDRG/Sub_script/scancel_and_resubmit.sh $Spin $ProbDis $bonDim $L1 $L2 $space_L $J1 $J2 $space_J $D1 $D2 $space_D $s1 $s2 $deltaSeed $BC $Ncore $partition &
 else
-    sh /home/aronton/tSDRG_project/tSDRG/subscancel.sh
+    sh /home/aronton/tSDRG_project/Sub_script/tSDRG/scancel_and_resubmit.sh
 fi

@@ -21,8 +21,9 @@ echo "seed2        ==> ${14}"
 echo "deltaSeed        ==> ${15}"
 echo "BC        ==> ${16}"
 echo "Ncore        ==> ${17}"
+echo "partition         ==> ${18}"
 
-
+partition=${18}
 
 Spin=$(echo "scale=0; (${1})/1" | bc)
 echo -e "Spin=$Spin"
@@ -164,23 +165,23 @@ now_date="$(date +'%Y_%m_%d')/"
 
 echo -e "$now_date"
 
-tSDRG_Path="/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/rm_submit/"
+re_Path="/home/aronton/tSDRG_project/tSDRG/Main_${Spin}/rm_re_submit/"
 
-echo -e "$tSDRG_Path"
+echo -e "$re_Path"
 
 
-if [ -d "${tSDRG_Path}""${now_date}" ]; then
+if [ -d "${re_Path}""${now_date}" ]; then
     # 目錄 /path/to/dir 存在
-    echo -e "${tSDRG_Path}""${now_date}"
+    echo -e "${re_Path}""${now_date}"
 else
     # 目錄 /path/to/dir 不存在
-    echo -e "mkdir""${tSDRG_Path}""${now_date}"
-    mkdir -p "${tSDRG_Path}""${now_date}"
+    echo -e "mkdir""${re_Path}""${now_date}"
+    mkdir -p "${tSDRre_PathG_Path}""${now_date}"
 fi
 
-fileName="Scancel_Spin="${Spin}";L="${L1}"_"${L2}"("${space_L}");J="${J1dis}"_"${J2dis}"("${space_Jdis}");D="${dim1}"_"${dim2}"("${space_dim}");seed1="${s1}"_seed2="${s2}"(sInterval=$sInterval)"
+fileName="Scancel_re_Spin="${Spin}";L="${L1}"_"${L2}"("${space_L}");J="${J1dis}"_"${J2dis}"("${space_Jdis}");D="${dim1}"_"${dim2}"("${space_dim}");seed1="${s1}"_seed2="${s2}"(sInterval=$sInterval)"
 
-fileDir=${tSDRG_Path}${now_date}${fileName}
+fileDir=${re_Path}${now_date}${fileName}
 
 mkdir -p "${fileDir}"
 
@@ -242,6 +243,44 @@ do
                                 echo -e ${name}
                                 echo -e ${name} >> "${file}.txt"
                                 scancel --name=${name}
+
+                                submitTime="$(date +'%Y_%m_%d_H%H_M%M_S%S')"
+
+                                # scriptName="spin${Spin}_L${L}_${Jdis}_${Dim}_B${bonDim}_BC=${BC}_Ncore=${Ncore}_seed1=${localS1}_seed2=${localS2}"
+                                
+                                # outputPath="${BC}/B${bonDim}/L${L}/${Jdis}/${Dim}/${scriptName}"
+                                # scriptName
+
+            
+                                scriptName="spin${Spin}_L${L}_${Jdis}_${Dim}_B${bonDim}_BC=${BC}_Ncore=${Ncore}_seed1=${localS1}_seed2=${localS2}_${submitTime}"
+                                jobName="spin${Spin}_L${L}_${Jdis}_${Dim}_B${bonDim}_BC=${BC}_Ncore=${Ncore}_seed1=${localS1}_seed2=${localS2}"
+                                outputPath="${BC}/B${bonDim}/L${L}/${Jdis}/${Dim}/${scriptName}"
+
+
+                                echo "sh ${scriptName} ${partition} ${L} ${J} ${D} ${localS1} ${localS2} ${Spin} ${bonDim} ${BC} ${Ncore}"
+                                echo -e "sh ${scriptName} ${partition} ${L} ${J} ${D} ${localS1} ${localS2} ${Spin} ${bonDim} ${BC} ${Ncore}\n" >> "${file}.txt"
+
+                                echo "sh outputPath ${outputPath}"
+                                echo -e "sh outputPath ${outputPath}\n" >> "${file}.txt"
+
+                                # echo "sh spin${Spin}_L${L}_${Jdis}_${Dim}_${bonDim}_${BC}_seed1=${s1}_seed2=${s2}.sh ${partition} ${L} ${J} ${D} ${s1} ${s2} ${Spin} ${bonDim} ${BC}"
+                                # echo -e "sh spin${Spin}_L${L}_${Jdis}_${Dim}_${bonDim}_${BC}_seed1=${s1}_seed2=${s2}.sh ${partition} ${L} ${J} ${D} ${s1} ${s2} ${Spin} ${bonDim} ${BC}" >> "${file}.txt"
+                                # /home/aronton/tSDRG_project/tSDRG/Sub_script/sub/run.sh
+                                cp /home/aronton/tSDRG_project/tSDRG/Sub_script/sub/run.sh /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}/${Jdis}/${Dim}/${scriptName}.sh
+                                
+                                sed -e "s@scopion@scopion$partition@" -i /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}/${Jdis}/${Dim}/${scriptName}.sh
+                                
+                                sed -e "s@cpus-per-task@cpus-per-task=$Ncore@" -i /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}/${Jdis}/${Dim}/${scriptName}.sh
+
+                                sed -e "s@fileName@${outputPath}@" -i /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}/${Jdis}/${Dim}/${scriptName}.sh                                
+                                # sed -e "s@fileName@${outputPath}@" -i /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}/${Jdis}/${Dim}/"spin${Spin}_L${L}_${Jdis}_${Dim}_${bonDim}_${BC}_Ncore=${Ncore}_seed1=${localS1}_seed2=${localS2}"
+
+                                sed -e "s@example@${jobName}@" -i /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}/${Jdis}/${Dim}/${scriptName}.sh  
+
+                                sed -e "s@Main@Main_${Spin}@" -i /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}/${Jdis}/${Dim}/${scriptName}.sh 
+                                
+                                sbatch /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}/${Jdis}/${Dim}/${scriptName}.sh ${L} ${J} ${D} ${localS1} ${localS2} ${Spin} ${bonDim} ${BC} ${Ncore}
+
                         done
                 done
         done

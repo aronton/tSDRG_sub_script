@@ -331,9 +331,10 @@ do
                                 localS2=$(( (${s}+1)*${sInterval}+${s1}-1 ))
                                 # localS1=${s}*${sInterval}+1
                                 # localS2=(${s}+1)*${sInterval}        
-
-                                scriptName="spin${Spin}_L${L}_${Jdis}_${Dim}_B${bonDim}_BC=${BC}_Ncore=${Ncore}_seed1=${localS1}_seed2=${localS2}"
-                                
+                                submitTime="$(date +'%Y_%m_%d_H%H_M%M_S%S')"
+                                # echo "ss:${submitTime}"
+                                scriptName="spin${Spin}_L${L}_${Jdis}_${Dim}_B${bonDim}_BC=${BC}_Ncore=${Ncore}_seed1=${localS1}_seed2=${localS2}_${submitTime}"
+                                jobName="spin${Spin}_L${L}_${Jdis}_${Dim}_B${bonDim}_BC=${BC}_Ncore=${Ncore}_seed1=${localS1}_seed2=${localS2}"
                                 outputPath="${BC}/B${bonDim}/L${L}/${Jdis}/${Dim}/${scriptName}"
                                 # scriptName
 
@@ -352,7 +353,9 @@ do
                                 
                                 sed -e "s@cpus-per-task@cpus-per-task=$Ncore@" -i /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}/${Jdis}/${Dim}/${scriptName}.sh
 
-                                sed -e "s@fileName@${outputPath}@" -i /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}/${Jdis}/${Dim}/${scriptName}.sh                                
+                                sed -e "s@fileName@${outputPath}@" -i /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}/${Jdis}/${Dim}/${scriptName}.sh    
+
+                                sed -e "s@example@${jobName}@" -i /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}/${Jdis}/${Dim}/${scriptName}.sh                               
                                 # sed -e "s@fileName@${outputPath}@" -i /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}/${Jdis}/${Dim}/"spin${Spin}_L${L}_${Jdis}_${Dim}_${bonDim}_${BC}_Ncore=${Ncore}_seed1=${localS1}_seed2=${localS2}"
 
                                 sed -e "s@Main@Main_${Spin}@" -i /home/aronton/tSDRG_project/tSDRG/Main_${Spin}/jobRecord/script/${BC}/B${bonDim}/L${L}/${Jdis}/${Dim}/${scriptName}.sh 
