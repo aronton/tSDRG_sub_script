@@ -17,6 +17,23 @@
 # }
 
 sinfo
+
+for i in {1..4};
+do
+    echo "scopion${i}"
+
+    a=$(squeue -p scopion${i} -o "%%.10i %%.10P %%.76j %%.8u%%.8T%%.15M" | grep -o "RUNNING")
+    Na=$(echo "${a}" | grep -c RUNNING)
+    echo "RUNNING:${Na}"
+
+
+    b=$(squeue -p scopion${i} -o "%%.10i %%.10P %%.76j %%.8u%%.8T%%.15M" | grep -o "PENDING")
+    Nb=$(echo "${b}" | grep -c PENDING)
+    echo "PENDING:${Nb}"
+    echo ""
+done
+
+
 read -p "partition : " partition
 scontrol show partition "scopion${partition}"
 read -p "Number of core : " Ncore
